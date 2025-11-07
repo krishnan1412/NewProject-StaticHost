@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — PG College Project</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <img src="assets/images/logo.png" alt="PG College Logo" class="logo"/>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>About PG College Project</h1>
+    <p>This is a sample static website designed as a college-level project demonstrating hosting on Amazon S3 + CloudFront with HTTPS via AWS Certificate Manager and automated deployment using GitHub Actions.</p>
+
+    <h2>Mission</h2>
+    <p>To provide quality education and practical training for students.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year2"></span> PG College Project — All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year2').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
