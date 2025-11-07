@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — PG College Project</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <img src="assets/images/logo.png" alt="PG College Logo" class="logo"/>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Contact Us</h1>
+    <p>Send us a message using the form below. (This static site demo uses a placeholder — integrate a service like Formspree, Netlify Forms, or your own backend.)</p>
+
+    <form id="contactForm" onsubmit="submitForm(event)">
+      <label>
+        Name
+        <input type="text" name="name" required />
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" required />
+      </label>
+      <label>
+        Message
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <button type="submit">Send</button>
+    </form>
+
+    <div id="msg" class="hidden">Thanks! Your message was sent (demo).</div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year3"></span> PG College Project — All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
