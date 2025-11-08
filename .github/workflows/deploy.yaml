@@ -22,8 +22,7 @@ jobs:
 
     - name: Sync files to S3
       run: |
-        aws s3 sync ./public s3://${{ secrets.S3_BUCKET_NAME }} \
-          --delete \
+        aws s3 sync s3://${{ secrets.S3_BUCKET_NAME }} \
           --acl public-read \
           --cache-control "max-age=0, no-cache, no-store, must-revalidate"
 
