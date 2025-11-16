@@ -4,7 +4,7 @@
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "0",
   "memory": "512",
-  "executionRoleArn": "arn:aws:iam::<account-id>:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::287767576128:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
       "name": "Pg-Project",
