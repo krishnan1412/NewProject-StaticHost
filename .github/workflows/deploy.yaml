@@ -41,4 +41,5 @@ jobs:
         service: PG-Project-service-02o09f03
         cluster: pleasant-zebra-yl9w4s
         # container-name: PG-Project
+        image: ${{ steps.login-ecr.outputs.registry }}/ecs-project:${{ github.sha }}
         wait-for-service-stability: true
