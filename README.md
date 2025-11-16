@@ -1,39 +1,60 @@
-**Containerize and Orchestrate**
+                        **Containerize and Orchestrate**
 
 Prerequisities
 •	AWS account with IAM user having ECS, ECR, and ALB permissions.
+•	Git Action to create the docker image and push in the ECR
 •	AWS CLI installed and configured (aws configure).
-•	Docker installed locally.
 •	Basic application code (e.g., Html, Css, Js).
 
-**Dockerize the Application**
+**	Dockerize the Application**
 Dockerfile
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf /usr/share/nginx/html/*
-COPY . /usr/share/nginx/html
+COPY ./* /usr/share/nginx/html
 EXPOSE 80
 
-**Build the Image**
-Syntax: docker build -t static-project .
 
-**	Push Image to Amazon ECR**
+**	CI/CD Pipeline**
+Create a CI/CD pipeline to create to the docker image and push in the ECR
+name: Deploy Static Website with ECS
 
-Create the ECR repository with the below command
-Syntax: aws ecr create-repository --repository-name pg-project
+on:
+  push:
+    branches:
+      - main  # or your deployment branch
 
-Authenticate the Docker to ECR
-Syntax: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 287767576128.dkr.ecr.us-east-1.amazonaws.com
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-Tag and push the image in repository with the syntax given below
-Syntax: docker tag pg-project:latest 287767576128.dkr.ecr.us-east-1.amazonaws.com/pg-project:latest
-docker push 287767576128.dkr.ecr.us-east-1.amazonaws.com/pg-project:latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Log in to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Build, tag, and push image to ECR
+      run: |
+        IMAGE_TAG=latest
+        docker build -t 287767576128.dkr.ecr.us-east-1.amazonaws.com/ecs-project:$IMAGE_TAG .
+        docker push 287767576128.dkr.ecr.us-east-1.amazonaws.com/ecs-project:$IMAGE_TAG
+
 
 **	Create the ECS Cluster (Fargate)**
 
 Create a Cluster with the below command
 Syntax: aws ecs create-cluster --cluster-name pg-project-cluster
-Create the task definition with the docker image uri
+Create the task definition with the docker image uri which in the ECR
 
 **	Create Application Load Balancer**
 
