@@ -1,0 +1,31 @@
+{
+  "cpu": 0,
+  "environment": [],
+  "environmentFiles": [],
+  "essential": true,
+  "image": "287767576128.dkr.ecr.us-east-1.amazonaws.com/ecs-project:latest",
+  "logConfiguration": {
+    "logDriver": "awslogs",
+    "options": {
+      "awslogs-group": "/ecs/PG-Project",
+      "awslogs-create-group": "true",
+      "awslogs-region": "us-east-1",
+      "awslogs-stream-prefix": "ecs"
+    },
+    "secretOptions": []
+  },
+  "mountPoints": [],
+  "name": "Pg-Project",
+  "portMappings": [
+    {
+      "appProtocol": "http",
+      "containerPort": 80,
+      "hostPort": 80,
+      "name": "pg-project",
+      "protocol": "tcp"
+    }
+  ],
+  "systemControls": [],
+  "ulimits": [],
+  "volumesFrom": []
+}
