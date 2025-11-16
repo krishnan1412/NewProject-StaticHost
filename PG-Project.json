@@ -2,7 +2,7 @@
   "family": "PG-Project",
   "networkMode": "awsvpc",
   "requiresCompatibilities": ["FARGATE"],
-  "cpu": "0",
+  "cpu": "256",
   "memory": "512",
   "executionRoleArn": "arn:aws:iam::287767576128:role/ecsTaskExecutionRole",
   "containerDefinitions": [
