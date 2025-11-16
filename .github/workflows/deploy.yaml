@@ -26,7 +26,7 @@ jobs:
 
     - name: Create the group and give access to the group
       run: |
-        sudo usermod -aG docker ubuntu
+        sudo usermod -aG docker $USER
 
     - name: Build, tag, and push image to ECR
       run: |
