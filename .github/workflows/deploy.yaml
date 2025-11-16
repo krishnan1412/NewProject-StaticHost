@@ -20,14 +20,20 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Sync files to S3
-      run: |
-        aws s3 sync ./ s3://${{ secrets.S3_BUCKET}} \
-          --acl public-read \
-          --cache-control "max-age=0, no-cache, no-store, must-revalidate"
+    - name: Log in to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
 
-    - name: Invalidate CloudFront (optional)
+    - name: Build, tag, and push image to ECR
       run: |
-        aws cloudfront create-invalidation \
-          --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
-          --paths "/*"
+        IMAGE_TAG=${{ github.sha }}
+        docker build -t ${{ secrets.ECR_REPOSITORY }}:$IMAGE_TAG .
+        docker push ${{ secrets.ECR_REPOSITORY }}:$IMAGE_TAG
+
+    - name: Deploy to ECS
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: PG-Project:1.json
+        service: PG-Project-service-02o09f03
+        cluster: pleasant-zebra-yl9w4s
+        wait-for-service-stability: true
