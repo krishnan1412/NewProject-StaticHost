@@ -31,8 +31,8 @@ jobs:
     - name: Build, tag, and push image to ECR
       run: |
         IMAGE_TAG=${{ github.sha }}
-        docker build -t ${{ secrets.ECR_REPOSITORY }}:$IMAGE_TAG .
-        docker push ${{ secrets.ECR_REPOSITORY }}:$IMAGE_TAG
+        docker build -t 287767576128.dkr.ecr.us-east-1.amazonaws.com/ecs-project:$IMAGE_TAG .
+        docker push 287767576128.dkr.ecr.us-east-1.amazonaws.com/ecs-project:$IMAGE_TAG
 
     - name: Deploy to ECS
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
