@@ -24,6 +24,10 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
 
+    - name: Create the group and give access to the group
+      run: |
+        sudo usermod -aG docker ubuntu
+
     - name: Build, tag, and push image to ECR
       run: |
         IMAGE_TAG=${{ github.sha }}
