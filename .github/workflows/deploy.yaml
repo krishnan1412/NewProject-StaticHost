@@ -37,7 +37,7 @@ jobs:
     - name: Deploy to ECS
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        task-definition: PG-Project.JSON
+        task-definition: PG-Project.json
         service: PG-Project-service-02o09f03
         cluster: pleasant-zebra-yl9w4s
         wait-for-service-stability: true
