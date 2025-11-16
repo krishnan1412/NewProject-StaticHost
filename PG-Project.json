@@ -7,7 +7,7 @@
   "executionRoleArn": "arn:aws:iam::287767576128:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
-      "name": "app",
+      "name": "PG-Project",
       "image": "287767576128.dkr.ecr.us-east-1.amazonaws.com/ecs-project:latest",
       "essential": true,
       "portMappings": [
