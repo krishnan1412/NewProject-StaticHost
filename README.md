@@ -1,22 +1,25 @@
-# :medal_military: Containerize and Orchestrate	
+## :medal_military: Containerize and Orchestrate	
 
-## :yellow_circle: Prerequisities
+**:yellow_circle: Prerequisities**
+
 •	AWS account with IAM user having ECS, ECR, and ALB permissions.\
 •	Git-Action to create the docker image and push in the ECR\
 •	AWS CLI installed and configured (aws configure).\
 •	Basic application code (e.g., Html, Css, Js).
 
-## :yellow_circle:	Dockerize the Application
+**:yellow_circle:	Dockerize the Application**
+
 Dockerfile
 
 	FROM nginx:alpine
 	WORKDIR /usr/share/nginx/html
 	RUN rm -rf /usr/share/nginx/html/*
-	COPY ./* /usr/share/nginx/html
+	COPY . /usr/share/nginx/html
 	EXPOSE 80
 
 
-## :yellow_circle:	CI/CD Pipeline (#Git-Action).
+**:yellow_circle:	CI/CD Pipeline**
+
 Create a CI/CD pipeline to create to the docker image and push in the ECR
 name: Deploy Static Website with ECS
 
@@ -47,29 +50,27 @@ name: Deploy Static Website with ECS
     - name: Build, tag, and push image to ECR
       run: |
         IMAGE_TAG=latest
-        docker build -t 287767576128.dkr.ecr.us-east-1.amazonaws.com/ecs-project:$IMAGE_TAG .
-        docker push 287767576128.dkr.ecr.us-east-1.amazonaws.com/ecs-project:$IMAGE_TAG
+        docker build -t <accountId>.dkr.ecr.us-east-1.amazonaws.com/ecs-project:$IMAGE_TAG .
+        docker push <accountId>.dkr.ecr.us-east-1.amazonaws.com/ecs-project:$IMAGE_TAG
 
 
-## :yellow_circle:	Create the ECS Cluster (Fargate)
+**:yellow_circle:	Create the ECS Cluster (Fargate)**
 
 Create a Cluster with the below command
 Syntax: aws ecs create-cluster --cluster-name pg-project-cluster
 Create the task definition with the docker image uri which in the ECR
 
-## :yellow_circle:	Create Application Load Balancer
+**:yellow_circle:	Create Application Load Balancer**
 
 Create ALB in the same VPC.
 Create a target group for ECS tasks (port 80)
 Configure listener on port 80 -> forward to target group
 
-## :yellow_circle:	Deploy ECS Service
+**:yellow_circle:	Deploy ECS Service**
 
 Create the ECS Service to deploy the task
 
-## :yellow_circle:	Verify Deployment
-
-http://pg-project-2073774823.us-east-1.elb.amazonaws.com
+**:yellow_circle:	Verify Deployment**
 
 
 
